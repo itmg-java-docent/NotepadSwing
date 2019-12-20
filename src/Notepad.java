@@ -9,33 +9,29 @@ import java.io.IOException;
 public class Notepad {
     private JPanel jpanel;
     private JTextArea textArea;
-    private JTextField textField;
     private JButton openButton;
 
     public Notepad() {
-        openButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                JFileChooser fileChooser = new JFileChooser();
-                int status = fileChooser.showOpenDialog(jpanel);
-                if (status == JFileChooser.APPROVE_OPTION) {
-                    try {
-                        FileReader fileReader = new FileReader(fileChooser.getSelectedFile());
-                        BufferedReader bufferedReader = new BufferedReader(fileReader);
-                        String line = bufferedReader.readLine();
-                        while (line != null)
-                        {
-                            textArea.append(line);
-                            line= bufferedReader.readLine();
-                        }
+        openButton.addActionListener(ae -> openFile());
+    }
 
-                    } catch ( IOException e) {
-                        System.out.println(e.getClass());
-                    }
+    private void openFile() {
+        JFileChooser fileChooser = new JFileChooser();
+        int status = fileChooser.showOpenDialog(jpanel);
+        if (status == JFileChooser.APPROVE_OPTION) {
+            try {
+                FileReader fileReader = new FileReader(fileChooser.getSelectedFile());
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+                String line = bufferedReader.readLine();
+                while (line != null) {
+                    textArea.append(line);
+                    line = bufferedReader.readLine();
                 }
 
+            } catch (IOException e) {
+                System.out.println(e.getClass());
             }
-        });
+        }
     }
 
     public static void main(String[] args) {
