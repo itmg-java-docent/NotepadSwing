@@ -1,11 +1,10 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class Notepad {
+    private static JFrame FRAME;
     private JPanel mainPanel;
     private JTextArea textArea;
     private JMenuBar menuBar;
@@ -25,6 +24,7 @@ public class Notepad {
         if (status == JFileChooser.APPROVE_OPTION) {
             try {
                 FileReader fileReader = new FileReader(fileChooser.getSelectedFile());
+                FRAME.setTitle(fileChooser.getSelectedFile().getName());
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
                 String line = bufferedReader.readLine();
                 while (line != null) {
@@ -38,12 +38,11 @@ public class Notepad {
         }
     }
 
-
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Notepad");
-        frame.setContentPane(new Notepad().mainPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        FRAME = new JFrame("Unsaved Document");
+        FRAME.setContentPane(new Notepad().mainPanel);
+        FRAME.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        FRAME.pack();
+        FRAME.setVisible(true);
     }
 }
