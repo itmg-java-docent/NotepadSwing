@@ -25,6 +25,7 @@ public class Notepad {
             try {
                 FileReader fileReader = new FileReader(fileChooser.getSelectedFile());
                 FRAME.setTitle(fileChooser.getSelectedFile().getName());
+                textArea.setText("");
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
                 String line = bufferedReader.readLine();
                 while (line != null) {
