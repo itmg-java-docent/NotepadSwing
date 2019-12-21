@@ -2,22 +2,26 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class Notepad {
-    private JPanel jpanel;
+    private JPanel mainPanel;
     private JTextArea textArea;
-    private JButton openButton;
+    private JMenuBar menuBar;
+    private JPanel panel;
+    private JMenu menu;
+    private JMenuItem mOpen;
+    private JMenuItem mSave;
+    private JMenuItem mSaveAs;
 
     public Notepad() {
-        openButton.addActionListener(ae -> openFile());
+        mOpen.addActionListener(ae -> openFile());
     }
 
     private void openFile() {
         JFileChooser fileChooser = new JFileChooser();
-        int status = fileChooser.showOpenDialog(jpanel);
+        int status = fileChooser.showOpenDialog(mainPanel);
         if (status == JFileChooser.APPROVE_OPTION) {
             try {
                 FileReader fileReader = new FileReader(fileChooser.getSelectedFile());
@@ -29,14 +33,15 @@ public class Notepad {
                 }
 
             } catch (IOException e) {
-                System.out.println(e.getClass());
+                System.out.println(e);
             }
         }
     }
 
+
     public static void main(String[] args) {
         JFrame frame = new JFrame("Notepad");
-        frame.setContentPane(new Notepad().jpanel);
+        frame.setContentPane(new Notepad().mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
