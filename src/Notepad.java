@@ -13,19 +13,21 @@ public class Notepad {
     private JMenuItem mSave;
     private JMenuItem mSaveAs;
     private JScrollPane scrollPane;
+    private File file = new File("Document1.txt");
 
 
     public Notepad() {
         mOpen.addActionListener(ae -> openFile());
-        mSave.addActionListener(ae -> saveFile());
+        mSaveAs.addActionListener(ae -> saveAsFile());
     }
 
     private void openFile() {
         int status = fileChooser.showOpenDialog(mainPanel);
         if (status == JFileChooser.APPROVE_OPTION) {
             try {
-                FileReader fileReader = new FileReader(fileChooser.getSelectedFile());
-                FRAME.setTitle(fileChooser.getSelectedFile().getName());
+                file = fileChooser.getSelectedFile();
+                FileReader fileReader = new FileReader(file);
+                FRAME.setTitle(file.getName());
                 textArea.setText("");
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
                 String line = bufferedReader.readLine();
@@ -40,8 +42,8 @@ public class Notepad {
         }
     }
 
-    public void saveFile() {
-        fileChooser.setSelectedFile(new File("Document1.txt"));
+    public void saveAsFile() {
+        fileChooser.setSelectedFile(file);
         int status = fileChooser.showSaveDialog(mainPanel);
         if (status == JFileChooser.APPROVE_OPTION) {
             try (BufferedWriter fileOut = new BufferedWriter(new FileWriter(fileChooser.getSelectedFile()))) {
@@ -51,6 +53,10 @@ public class Notepad {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void saveFile() {
+
     }
 
     public static void main(String[] args) {
