@@ -1,10 +1,9 @@
 import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class Notepad {
     private static JFrame FRAME;
+    private JFileChooser fileChooser = new JFileChooser();
     private JPanel mainPanel;
     private JTextArea textArea;
     private JMenuBar menuBar;
@@ -15,12 +14,13 @@ public class Notepad {
     private JMenuItem mSaveAs;
     private JScrollPane scrollPane;
 
+
     public Notepad() {
         mOpen.addActionListener(ae -> openFile());
+        mSave.addActionListener(ae -> saveFile());
     }
 
     private void openFile() {
-        JFileChooser fileChooser = new JFileChooser();
         int status = fileChooser.showOpenDialog(mainPanel);
         if (status == JFileChooser.APPROVE_OPTION) {
             try {
@@ -36,6 +36,19 @@ public class Notepad {
 
             } catch (IOException e) {
                 System.out.println(e);
+            }
+        }
+    }
+
+    public void saveFile() {
+        fileChooser.setSelectedFile(new File("Document1.txt"));
+        int status = fileChooser.showSaveDialog(mainPanel);
+        if (status == JFileChooser.APPROVE_OPTION) {
+            try (BufferedWriter fileOut = new BufferedWriter(new FileWriter(fileChooser.getSelectedFile()))) {
+                textArea.write(fileOut);
+                FRAME.setTitle(fileChooser.getSelectedFile().getName());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
