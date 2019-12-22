@@ -13,6 +13,7 @@ public class Notepad {
     private JMenuItem mOpen;
     private JMenuItem mSave;
     private JMenuItem mSaveAs;
+    private JScrollPane scrollPane;
 
     public Notepad() {
         mOpen.addActionListener(ae -> openFile());
@@ -29,7 +30,7 @@ public class Notepad {
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
                 String line = bufferedReader.readLine();
                 while (line != null) {
-                    textArea.append(line);
+                    textArea.append(line+"\n");
                     line = bufferedReader.readLine();
                 }
 
