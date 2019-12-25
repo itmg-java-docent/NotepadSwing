@@ -19,6 +19,7 @@ public class Notepad {
     public Notepad() {
         mOpen.addActionListener(ae -> openFile());
         mSaveAs.addActionListener(ae -> saveAsFile());
+        mSave.addActionListener(ae->saveFile());
     }
 
     private void openFile() {
@@ -42,21 +43,31 @@ public class Notepad {
         }
     }
 
+    private void doSave() {
+        try (BufferedWriter fileOut = new BufferedWriter(new FileWriter(fileChooser.getSelectedFile()))) {
+            textArea.write(fileOut);
+            FRAME.setTitle(fileChooser.getSelectedFile().getName());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void saveAsFile() {
         fileChooser.setSelectedFile(file);
         int status = fileChooser.showSaveDialog(mainPanel);
         if (status == JFileChooser.APPROVE_OPTION) {
-            try (BufferedWriter fileOut = new BufferedWriter(new FileWriter(fileChooser.getSelectedFile()))) {
-                textArea.write(fileOut);
-                FRAME.setTitle(fileChooser.getSelectedFile().getName());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
     public void saveFile() {
-
+        //new file
+        if (file.lastModified()==0) {
+          saveAsFile();
+        } else
+        //old file
+        {
+            doSave();
+        }
     }
 
     public static void main(String[] args) {
