@@ -56,6 +56,7 @@ public class Notepad {
         fileChooser.setSelectedFile(file);
         int status = fileChooser.showSaveDialog(mainPanel);
         if (status == JFileChooser.APPROVE_OPTION) {
+            doSave();
         }
     }
 
