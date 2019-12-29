@@ -42,6 +42,12 @@
                   <vspacer id="e24d4">
                     <constraints/>
                   </vspacer>
+                  <component id="13e8" class="javax.swing.JMenuItem" binding="mNew">
+                    <constraints/>
+                    <properties>
+                      <text value="New"/>
+                    </properties>
+                  </component>
                   <component id="ba0a9" class="javax.swing.JMenuItem" binding="mOpen">
                     <constraints/>
                     <properties>

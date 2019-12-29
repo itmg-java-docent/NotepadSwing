@@ -9,6 +9,7 @@ public class Notepad {
     private JMenuBar menuBar;
     private JPanel panel;
     private JMenu menu;
+    private JMenuItem mNew;
     private JMenuItem mOpen;
     private JMenuItem mSave;
     private JMenuItem mSaveAs;
@@ -20,6 +21,7 @@ public class Notepad {
         mOpen.addActionListener(ae -> openFile());
         mSaveAs.addActionListener(ae -> saveAsFile());
         mSave.addActionListener(ae->saveFile());
+        mNew.addActionListener(ae->newFile());
     }
 
     private void openFile() {
@@ -69,6 +71,10 @@ public class Notepad {
         {
             doSave();
         }
+    }
+
+    public void newFile() {
+
     }
 
     public static void main(String[] args) {
