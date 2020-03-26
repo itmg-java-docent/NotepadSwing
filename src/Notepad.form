@@ -27,7 +27,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <grid id="ee70" class="javax.swing.JMenu" binding="menu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+              <grid id="ee70" class="javax.swing.JMenu" binding="menu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -36,12 +36,6 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <hspacer id="f014c">
-                    <constraints/>
-                  </hspacer>
-                  <vspacer id="e24d4">
-                    <constraints/>
-                  </vspacer>
                   <component id="13e8" class="javax.swing.JMenuItem" binding="mNew">
                     <constraints/>
                     <properties>
